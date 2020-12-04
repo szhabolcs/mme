@@ -1,9 +1,26 @@
-window.onload = function() {
-    const message = document.getElementById("message")
-    document.getElementById("button").addEventListener("click", () => {
-      console.log("hello", message)
-      fetch("/.netlify/functions/proxy?name=" + "Netlify")
-        .then((data) => data.json())
-        .then(({ msg }) => console.log(msg) || (message.innerHTML = msg))
-    })
-  }
+$(document).ready(function(){
+    /**
+     * Fetch proxy 
+     */
+    $("#button").click(()=>{
+        let token;
+
+        if(netlifyIdentity.currentUser() != null){
+            token = netlifyIdentity.currentUser().token.access_token; 
+        }
+        else token = "";
+
+        $.ajax({
+            url: "/.netlify/functions/proxy",
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            complete: (response) =>{
+                let data = JSON.parse(response.responseText);
+                alert(data.msg);
+            }
+        });
+    });
+});
