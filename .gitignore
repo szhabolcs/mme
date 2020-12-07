@@ -5,3 +5,6 @@ Referenced Packages
 /api/.env
 # Local Netlify folder
 .netlify
+/node_modules
+/package-lock.json
+/.env

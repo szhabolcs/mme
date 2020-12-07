@@ -25,10 +25,11 @@
 
     /**
      * POST /telepules
-     * params: telepulesID, telepulesNev, megyeID (all are required)
+     * params: telepulesID, telepulesNev, megyeID, MASTERPASS (all are required)
      * Inserts new settlement.
      */
-    if($_SERVER["REQUEST_METHOD"] == "POST" && $requestParts[0] == "telepules"){
+
+    if($_SERVER["REQUEST_METHOD"] == "POST" && $requestParts[0] == "telepules" && $_ENV["MASTERPASS"] == $_GET["MASTERPASS"]){
         $telepulesID = $_GET["telepulesID"];
         $telepulesNev = $_GET["telepulesNev"];
         $megyeID = $_GET["megyeID"];
@@ -47,10 +48,10 @@
     }
     /**
      * PUT /telepules/:telepulesID
-     * params: telepulesID, telepulesNev, megyeID (all are optional)
+     * params: telepulesID, telepulesNev, megyeID (all are optional), MASTERPASS (required)
      * Edits settlement identified by id.
      */
-    else if($_SERVER["REQUEST_METHOD"] == "PUT" && $requestParts[0] == "telepules"){
+    else if($_SERVER["REQUEST_METHOD"] == "PUT" && $requestParts[0] == "telepules" && $_ENV["MASTERPASS"] == $_GET["MASTERPASS"]){
         $fields;
         if(isset($_GET["telepulesID"])) $fields = "telepulesID = ".$_GET["telepulesID"];
         if ($fields == null && isset($_GET["telepulesNev"])) $fields = "telepulesNev = '".$_GET["telepulesNev"]."'";
@@ -79,10 +80,10 @@
     }
     /**
      * DELETE /telepules/:telepulesID
-     * params: none
+     * params: MASTERPASS (required)
      * Deletes settlement identified by id.
      */
-    else if($_SERVER["REQUEST_METHOD"] == "DELETE" && $requestParts[0] == "telepules"){
+    else if($_SERVER["REQUEST_METHOD"] == "DELETE" && $requestParts[0] == "telepules" && $_ENV["MASTERPASS"] == $_GET["MASTERPASS"]){
         $query = "DELETE FROM telepulesek WHERE telepulesID = $requestParts[1]";
 
         $data = mysqli_query($conn, $query);
@@ -94,6 +95,10 @@
             $response->state = "fail";
             $response->error = "No id found.";
         }
+    }
+    else if(!isset($_GET["MASTERPASS"]) && ($_SERVER["REQUEST_METHOD"] == "DELETE" || $_SERVER["REQUEST_METHOD"] == "PUT" || $_SERVER["REQUEST_METHOD"] == "POST")){
+        $response->state = "fail";
+        $response->error = "Access not granted.";
     }
     /**
      * GET /telepulesek

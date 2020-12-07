@@ -19,7 +19,7 @@ $(document).ready(function(){
             },
             complete: (response) =>{
                 let data = JSON.parse(response.responseText);
-                alert(data.msg);
+                console.log(data);
             }
         });
     });
