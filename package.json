@@ -1,0 +1,27 @@
+{
+  "name": "mme",
+  "version": "1.0.0",
+  "description": "mme school project",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "netlify-cli": "^2.69.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "netlify dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToastedWaffle/mme.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Nagy Szabolcs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToastedWaffle/mme/issues"
+  },
+  "homepage": "https://github.com/ToastedWaffle/mme#readme"
+}
