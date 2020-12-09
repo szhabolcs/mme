@@ -6,6 +6,7 @@ exports.handler = async (event, context) => {
     let response = {data: "not logged in"};
 
     const MASTERPASS = process.env.MASTERPASS;
+    const APIENDPOINT = process.env.APIENDPOINT;
     
     if(typeof(user) === "undefined"){
         //Guest logged in
@@ -14,8 +15,8 @@ exports.handler = async (event, context) => {
     else if(typeof(user.app_metadata.roles) !== 'undefined' && user.app_metadata.roles[0] == "admin"){
         //Admin logged in
         userRole = "admin";
-
-        await axios.get("http://localhost/school/mme/api/telepulesek",{
+        
+        await axios.get(APIENDPOINT+"/telepulesek",{
             params: {
                 MASTERPASS: MASTERPASS
             }
@@ -25,8 +26,6 @@ exports.handler = async (event, context) => {
         .catch((error)=>{
             response = error;
         });
-
-        console.log(response);
     }
 
     return { statusCode: 200, body: JSON.stringify(response.data) }
