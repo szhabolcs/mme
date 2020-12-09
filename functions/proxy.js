@@ -1,5 +1,3 @@
-const { env } = require('yargs');
-
 exports.handler = async (event, context) => {
     const {identity, user} = context.clientContext;
     const axios = require('axios').default;
@@ -17,7 +15,11 @@ exports.handler = async (event, context) => {
         //Admin logged in
         userRole = "admin";
 
-        await axios.get("http://localhost/school/mme/api/telepulesek").then((e)=>{
+        await axios.get("http://localhost/school/mme/api/telepulesek",{
+            params: {
+                MASTERPASS: MASTERPASS
+            }
+        }).then((e)=>{
             response = e;
         })
         .catch((error)=>{
