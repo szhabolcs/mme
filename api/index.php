@@ -21,7 +21,7 @@
 
     //Initiating the response
     $response;
-    header('Content-type: application/json');    
+    header('Content-type: application/json');
 
     /**
      * POST /telepules

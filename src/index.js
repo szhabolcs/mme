@@ -11,7 +11,8 @@ $(document).ready(function(){
         else token = "";
 
         $.ajax({
-            url: "/.netlify/functions/proxy",
+            type: "delete",
+            url: "/.netlify/functions/proxy/telepules/332",
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
