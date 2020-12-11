@@ -31,7 +31,7 @@ router.post("*", async (req, res) => {
         });
     }
 
-    res.json(response.data);
+    res.status(200).json(response.data);
 });
 
 router.put("*", async (req, res) => {
@@ -55,7 +55,7 @@ router.put("*", async (req, res) => {
         });
     }
 
-    res.json(response.data);
+    res.status(200).json(response.data);
 });
 
 router.delete("*", async (req, res) => {
@@ -79,7 +79,7 @@ router.delete("*", async (req, res) => {
         });
     }
 
-    res.json(response.data);
+    res.status(200).json(response.data);
 });
 
 router.get("*", async (req, res) => {
@@ -93,7 +93,7 @@ router.get("*", async (req, res) => {
         response = error;
     });
 
-    res.json(response.data);
+    res.status(200).json(response.data);
 });
 
 app.use("/.netlify/functions/proxy",router);
@@ -104,4 +104,3 @@ module.exports.handler = serverless(app, {
         req.context = context;
     },
  });
- 
