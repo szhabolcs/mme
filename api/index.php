@@ -1,5 +1,6 @@
 <?php
-
+    error_reporting(0);
+    
     /**
      * Checking if the environment is local or server
      * because the server doesn't support .env files.
