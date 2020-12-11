@@ -62,7 +62,7 @@ router.delete("*", async (req, res) => {
     const {user} = req.context.clientContext;
 
     if(typeof(user) === "undefined"){
-        //Guest logged in
+        response.data = "Not logged in";
     }
     else if(typeof(user.app_metadata.roles) !== 'undefined' && user.app_metadata.roles[0] == "admin"){
         //Admin logged in
