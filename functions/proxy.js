@@ -15,7 +15,7 @@ router.post("*", async (req, res) => {
 
     if(typeof(user) === "undefined"){
         //Guest logged in
-        response.data = "Operation not permitted.";
+        response = {data: "Operation not permitted."};
     }
     else if(typeof(user.app_metadata.roles) !== 'undefined' && user.app_metadata.roles[0] == "admin"){
         //Admin logged in
@@ -40,7 +40,7 @@ router.put("*", async (req, res) => {
 
     if(typeof(user) === "undefined"){
         //Guest logged in
-        response.data = "Operation not permitted.";
+        response = {data: "Operation not permitted."};
     }
     else if(typeof(user.app_metadata.roles) !== 'undefined' && user.app_metadata.roles[0] == "admin"){
         //Admin logged in
@@ -65,7 +65,7 @@ router.delete("*", async (req, res) => {
 
     if(typeof(user) === "undefined"){
         //Guest logged in
-        response.data = "Operation not permitted.";
+        response = {data: "Operation not permitted."};
     }
     else if(typeof(user.app_metadata.roles) !== 'undefined' && user.app_metadata.roles[0] == "admin"){
         //Admin logged in
