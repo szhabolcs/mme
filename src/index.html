@@ -4,34 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MME</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <style>
-    body {
-        background-color: #121212;
-        color: white;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        margin: 5%;
-    }
-  
-    input,
-    select {
-        margin: 5px 0px;
-    }
-  </style>
+
+  <ul class="nav justify-content-end">
+    <div id="nav-ball"></div>
+    <li class="nav-item" style="flex: auto !important;">
+      <a class="nav-link">A Magyar Madártani és Természetvédelmi Egyesület </a>
+    </li>
+    <li class="nav-item" style="margin-right: 40px;">
+      <a class="nav-link" href="#">Elérhetőség</a>
+    </li>
+    <li class="nav-item" style="margin-right: 40px;">
+      <a class="nav-link" href="#">Települések</a>
+    </li>
+    <li class="nav-item" style="margin-right: 40px;">
+      <a class="nav-link" href="#">Több infó</a>
+    </li>
+  </ul>
+
+  <div class="container">
+    <div id="header">
+      <div>
+        <h1>Shh... épp hazafele mennek!</h1>
+        <p>Fedezd fel az ők és sok mások otthonát!</p>
+      </div>
+      <img src="img/header image.png" alt="kacsak hader">
+      <p>görgess le <img src="img/arrow down.png" alt="arrow down" style="height: 16px; width: 16px; margin-left: 5px;"></p>
+    </div>
+
+    <div class="container section" style="padding-top: 80px; padding-bottom: 50px">
+      <div class="row">
+        <div class="col">
+          <h2 style="margin-bottom: 37px; font-weight: bold;">
+            Minden ami vizimadár, 
+            <br> egy helyen.
+          </h2>
+
+          <div style="width: 70%;">
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+            <p>
+            <p>
+              At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+            </p>
+          </div>
+          <div class="button" id="visit">
+            Megtekintés
+          </div>
+        </div>
+        <div class="col">
+          <img src="img/Coming_soon.png" style="width: 100%; transform: scale(1.6);">
+        </div>
+      </div>
+    </div>
+
+    <div class="container section" style="padding-top: 50px; height: 100vh; margin-bottom: 250px;">
+        <div class="row">
+          <h1 style="text-align: center; width: 100%;">Nade... most a számok beszéljenek</h1>
+        </div>
+
+        <div class="container" style="margin-top: 100px; width: 80%;">
+          <div class="row">
+            <div class="col">
+              <p style="font-size: 1.5rem; line-height: 1.3;">
+                Sikeresen 
+                azonosítottunk 
+                mindössze:
+              </p>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="megye"></span>
+                <br>
+                <span>megyét</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="telepules"></span>
+                <br>
+                <span>települést</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="terulet"></span>
+                <br>
+                <span>területet</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 45px;">
+            <div class="col">
+              <p style="font-size: 1.5rem; line-height: 1.3; position: absolute; top: calc(50% - 16px);">
+                Amiből van:
+              </p>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="mennyiseg-1"></span>
+                <br>
+                <span id="mennyiseg-nev-1"></span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="mennyiseg-2"></span>
+                <br>
+                <span id="mennyiseg-nev-2"></span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="stat-box">
+                <span id="mennyiseg-3"></span>
+                <br>
+                <span id="mennyiseg-nev-3"></span>
+              </div>
+            </div>            
+          </div>
+          <div class="ro">
+            <span style="margin-top: 20px; display: inline-block; width: 100%; text-align: center;">Az értékek élőben vannak megjelenítve.</span>
+          </div>
+          <div class="row">
+            <p style="font-size: 1.5rem; line-height: 1.3; margin-top: 70px;">
+              ...és még sok más.
+              <br> Szóval gyere, fedezd fel velünk a természet csódáit!
+            </p>
+            <img src="img/Congratulations.png" style="display: block; margin: 0 auto; width: 50%;">
+          </div>
+          
+        </div>
+    </div>
+  </div>
+    <div style="margin-top: 100px; background-color: #005156; padding: 34px; color: white;">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Az oldal tetejére</a>
+        </p>
+        <p>MME © 2020 Minden jog fenntartva.</p>
+        <p style="margin-bottom: 0px;">Szerkesztője vagy az oldalnak? <span onclick="netlifyIdentity.open();" style="text-decoration: underline; cursor: pointer;"> Jelentkezz be </span> vagy kérj hozzáférést rendszergazdánktól.</p>
+      </div>
+    </div>
     <!-- Add a menu:
    Log in / Sign up - when the user is not logged in
    Username / Log out - when the user is logged in
   -->
-  <div data-netlify-identity-menu></div>
+  <!-- <div data-netlify-identity-menu></div> -->
 
   <!-- Add a simpler button:
     Simple button that will open the modal.
   -->
-  <div data-netlify-identity-button>Login with Netlify Identity</div>
-
+  <!-- <div data-netlify-identity-button>Login with Netlify Identity</div> -->
+<!-- 
   <div id="message">hellooo</div>
-  <div id="button">press meee</div>
+  <div id="button">press meee</div> -->
 
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
