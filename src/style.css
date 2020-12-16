@@ -21,6 +21,10 @@ body{
     font-weight: bold;
     font-size: 18px;
 }
+.nav-active{
+    background-color: #E46322;
+    color: black;
+}
 .nav-link{
     margin-top: 16.5px;
     height: 45px;
