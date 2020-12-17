@@ -328,7 +328,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "post",
-            url: "/.netlify/functions/proxy/telepules/"+telepulesID+"?"+$.param(params),
+            url: "/.netlify/functions/proxy/telepules/"+"?"+$.param(params),
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
