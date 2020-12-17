@@ -40,7 +40,7 @@ $(document).ready(function(){
         var response;
         var src = {};
 
-        await getData(`/telepulesek?with-column=megyeNev;telepulesek.telepulesID&order=${order}${megye}`).done((e)=>{
+        await getData(`/telepulesek?with-column=megyeNev&order=${order}${megye}`).done((e)=>{
             response = e;
         });
 
@@ -134,7 +134,7 @@ $(document).ready(function(){
 
         $("#card-box").empty();
 
-        await getData(`/telepulesek?with-column=megyeNev;telepulesek.telepulesID&order=${order}${megye}`).done((e)=>{
+        await getData(`/telepulesek?with-column=megyeNev&order=${order}${megye}`).done((e)=>{
             response = e;
             pageMax = e[0]["rows"];
         });

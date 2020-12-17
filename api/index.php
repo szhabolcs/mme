@@ -107,7 +107,7 @@
      * Returns settlements with given columns.
      */
     else if($requestParts[0] == "telepulesek"){
-        $columns = "telepulesek.telepulesNev";
+        $columns = "telepulesek.telepulesID,telepulesek.telepulesNev";
         $withColumn = explode(";", $_GET["with-column"]);
 
         if(isset($_GET["with-column"]))
