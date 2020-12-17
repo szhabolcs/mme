@@ -130,20 +130,39 @@ $(document).ready(function(){
 
         i = start;
 
-        for (i; i <= end; i++) {
-            var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"]);
+        if(searchTerms.length == 0)
+            for (i; i <= end; i++) {
+                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"]);
 
-            await getData(`/telepules/${response[i]["telepulesID"]}/teruletek`).done((response)=>{
-                
-                for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
-                    card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
-                }
+                await getData(`/telepules/${response[i]["telepulesID"]}/teruletek`).done((response)=>{
+                    
+                    for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
+                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
+                    }
 
-                if(response.length - 1 > 3)
-                    card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
-            });
+                    if(response.length - 1 > 3)
+                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
+                });
 
-            $("#card-box").append(card).hide().fadeIn(500);
+                $("#card-box").append(card).hide().fadeIn(500);
+            }
+        else
+        for (i = 1; i <= pageMax; i++) {
+            if(searchTerms.includes(response[i]["telepulesNev"])){
+                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"]);
+
+                await getData(`/telepules/${response[i]["telepulesID"]}/teruletek`).done((response)=>{
+                    
+                    for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
+                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
+                    }
+
+                    if(response.length - 1 > 3)
+                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
+                });
+
+                $("#card-box").append(card).hide().fadeIn(500);
+            }
         }
     }
 
