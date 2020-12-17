@@ -110,3 +110,24 @@ iframe{
     background-color: #ff4d4d9c;
     border-color: #cc0000e6;
 }
+
+.btn-save{
+    background-color: #0b707b;
+    color: white;
+}
+.btn-save:hover{
+    color: white;
+    background-color: #05545d;
+}
+
+.btn-delete{
+    background-color: #cc2727;
+    color: white;
+    display: block;
+    position: absolute;
+    left: 16px;
+}
+.btn-delete:hover{
+    color: white;
+    background-color: #b31818;
+}

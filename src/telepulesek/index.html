@@ -68,6 +68,9 @@
               <span id="prev-btn" style="cursor: pointer !important; float: right;background: #15767e;color: white;padding: 7px 16px;border-radius: 24px; margin-right: 10px;">
                 <svg style="height: 1rem;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>
               </span>
+              <span id="new-btn" style="margin-right: 40px; cursor: pointer !important; float: right;background: #15767e;color: white;padding: 7px 16px;border-radius: 24px;">
+                Új település
+              </span>
             </div>
           </div>
 
@@ -88,6 +91,85 @@
         <p style="margin-bottom: 0px;">Szerkesztője vagy az oldalnak? <span onclick="netlifyIdentity.open();" style="text-decoration: underline; cursor: pointer;"> Jelentkezz be </span> vagy kérj hozzáférést rendszergazdánktól.</p>
       </div>
     </div>
+
+  <!-- Edit modal -->
+  <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-modal-label">Település szerkesztése</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="modal-telepules-nev">Név:</label>
+            <input type="text" class="form-control" id="modal-telepules-nev">
+          </div>
+
+          <div class="form-group">
+            <label for="modal-megye">Megye:</label>
+            <select class="custom-select" id="modal-megye">
+              
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-telepules-azo">Azonósító:</label>
+            <input type="number" class="form-control" id="modal-telepules-azo">
+          </div>
+
+          <small class="form-text text-muted">Figyelmesen töltse ki az adatokat.</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-delete">Törlés</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-save" id="edit-btn-save">Mentés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add modal -->
+  <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-modal-label">Település hozzáadása</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="add-modal-telepules-nev">Név:</label>
+            <input type="text" class="form-control" id="add-modal-telepules-nev">
+          </div>
+
+          <div class="form-group">
+            <label for="add-modal-megye">Megye:</label>
+            <select class="custom-select" id="add-modal-megye">
+              
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="add-modal-telepules-azo">Azonósító:</label>
+            <input type="number" class="form-control" id="add-modal-telepules-azo">
+          </div>
+
+          <small class="form-text text-muted">Figyelmesen töltse ki az adatokat.</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-save" id="add-btn-save">Hozzáadás</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   

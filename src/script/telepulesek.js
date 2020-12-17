@@ -12,7 +12,7 @@ $(document).ready(function(){
      */
     function getData(path){
         let token;
-        let response
+        let response;
 
         if(netlifyIdentity.currentUser() != null){
             token = netlifyIdentity.currentUser().token.access_token; 
@@ -65,6 +65,8 @@ $(document).ready(function(){
         
         searchTerms.push(item.value);
 
+        $("#search").val("");
+
         makeCards(pageStart, pageEnd);
     }
     $("#search-output").delegate(".search-pill","click",(e)=>{
@@ -80,15 +82,17 @@ $(document).ready(function(){
 
 
     /**
-     * Megyek lekerese a select szureshez
+     * Megyek lekerese a select szureshez, szerkeszteshez es hozzaadasahoz
      */
     getData("/megyek").done((response)=>{
         response.shift();
         for (const megye of response) {
             $("#megye").append(`<option value="${megye["megyeNev"]}">${megye["megyeNev"]}</option>`);
+            $("#modal-megye").append(`<option value="${megye["megyeID"]}">${megye["megyeNev"]}</option>`);
+            $("#add-modal-megye").append(`<option value="${megye["megyeID"]}">${megye["megyeNev"]}</option>`);
         }
     });
-    
+
     /**
      * Telepulesek kartya generalasa
      */
@@ -100,6 +104,7 @@ $(document).ready(function(){
         card.find(".telepules-card-nev").text(nev);
         card.find(".telepules-card-megye").text(megye);
         card.find("iframe").attr("src",src);
+        card.find(".telepules-card-edit").attr("id",telepulesID);
 
         return new Promise(resolve => { 
             getData(`/telepules/${telepulesID}/teruletek`).done((response)=>{
@@ -143,16 +148,22 @@ $(document).ready(function(){
 
         if(searchTerms.length == 0)
             for (i; i <= end; i++) {
-                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
-                        $("#card-box").append(card).fadeIn(500);
+                makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
+                        $("#card-box").append(card);
+                        if(netlifyIdentity.currentUser() == null){
+                            $(".telepules-card-edit").hide();
+                        }
                     }
                 );
             }
         else
         for (i = 1; i <= pageMax; i++) {
             if(searchTerms.includes(response[i]["telepulesNev"])){
-                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
-                        $("#card-box").append(card).fadeIn(500);
+                makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
+                        $("#card-box").append(card);
+                        if(netlifyIdentity.currentUser() == null){
+                            $(".telepules-card-edit").hide();
+                        }
                     }
                 );
             }
@@ -203,4 +214,139 @@ $(document).ready(function(){
             alert("Nincs elöző oldal!");
         }
     });
+
+    /**
+     * Telepules szerkeszto modal elokeszitese
+     */
+    $("body").delegate(".telepules-card-edit","click",async (e)=>{
+        let telepulesID = $(e.currentTarget).attr("id");
+        let telepulesNev;
+        let megyeID;
+
+        await getData(`/telepules/${telepulesID}/`).done((e)=>{
+            telepulesNev = e[1]["telepulesNev"];
+            megyeID = e[1]["megyeID"];
+        });
+
+        $("#modal-telepules-nev").val(telepulesNev);
+        $("#modal-telepules-azo").val(telepulesID);
+        $(`option[value=${megyeID}]`).attr('selected', true);
+        $(".modal-body").attr("id",telepulesID);
+
+        $("#edit-modal").modal('show');
+    });
+
+    /**
+     * Modal mentes
+     */
+    $("#edit-btn-save").click(()=>{
+        let selectedTelepulesID = $(".modal-body").attr("id");
+        let telepulesID = $("#modal-telepules-azo").val();
+        let telepulesNev = $("#modal-telepules-nev").val();
+        let megyeID = $("#modal-megye").find("option:selected").val();
+        let token;
+
+        let params = {};
+
+        if(telepulesID) params["telepulesID"] = telepulesID;
+        if(telepulesNev) params["telepulesNev"] = telepulesNev;
+        if(megyeID) params["megyeID"] = megyeID;
+
+        if(netlifyIdentity.currentUser() != null){
+            token = netlifyIdentity.currentUser().token.access_token; 
+        }
+        else token = "";
+
+        $.ajax({
+            type: "put",
+            url: "/.netlify/functions/proxy/telepules/"+selectedTelepulesID+"?"+$.param(params),
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            complete: (e) =>{
+                response = JSON.parse(e.responseText);
+
+                $("#edit-modal").modal('hide');
+                makeCards(pageStart, pageEnd);
+            }
+        });
+    });
+
+    /**
+     * Modal torles
+     */
+    $(".btn-delete").click(()=>{
+        let selectedTelepulesID = $(".modal-body").attr("id");
+        let token;
+
+        if(netlifyIdentity.currentUser() != null){
+            token = netlifyIdentity.currentUser().token.access_token; 
+        }
+        else token = "";
+
+        $.ajax({
+            type: "delete",
+            url: "/.netlify/functions/proxy/telepules/"+selectedTelepulesID,
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            complete: (e) =>{
+                response = JSON.parse(e.responseText);
+
+                $("#edit-modal").modal('hide');
+                makeCards(pageStart, pageEnd);
+            }
+        });
+    });
+
+    $("#new-btn").click(async ()=>{
+        $("#add-modal-telepules-azo").val(pageMax+5);
+
+        $("#add-modal").modal('show');
+    });
+
+    $("#add-btn-save").click(()=>{
+        let telepulesID = $("#add-modal-telepules-azo").val();
+        let telepulesNev = $("#add-modal-telepules-nev").val();
+        let megyeID = $("#add-modal-megye").find("option:selected").val();
+        let token;
+
+        let params = {};
+
+        if(telepulesID) params["telepulesID"] = telepulesID;
+        if(telepulesNev) params["telepulesNev"] = telepulesNev;
+        if(megyeID) params["megyeID"] = megyeID;
+
+        if(netlifyIdentity.currentUser() != null){
+            token = netlifyIdentity.currentUser().token.access_token; 
+        }
+        else token = "";
+
+        $.ajax({
+            type: "post",
+            url: "/.netlify/functions/proxy/telepules/"+telepulesID+"?"+$.param(params),
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            complete: (e) =>{
+                response = JSON.parse(e.responseText);
+
+                $("#add-modal").modal('hide');
+                makeCards(pageStart, pageEnd);
+            }
+        });
+    });
+
+    if(netlifyIdentity.currentUser() == null){
+        $("#new-btn").hide();
+    }
+
+    netlifyIdentity.on('login', () => location.reload());
+    netlifyIdentity.on('logout', () => location.reload());
 });
