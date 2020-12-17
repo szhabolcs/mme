@@ -22,6 +22,8 @@ router.post("*", async (req, res) => {
 
         req.query.MASTERPASS = MASTERPASS;
 
+        console.log("POST ENDPOINT HERE:", APIENDPOINT+req.path);
+
         await axios.post(APIENDPOINT+req.path, null,{
             params: req.query
         }).then((e)=>{

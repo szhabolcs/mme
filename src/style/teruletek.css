@@ -1,0 +1,49 @@
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus,
+.custom-select:focus {   
+  border-color: rgb(21, 21, 21) !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(105, 105, 105, 0.6) !important;
+  outline: 0 none !important;
+}
+
+#sidebar{
+    background: #ffffffc4;
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+#sidebar p{
+    margin-bottom: 0.5rem;
+}
+#table-holder{
+    background: #ffffffc4;
+    backdrop-filter: blur(5px);
+    padding: 28px 30px;
+    border-radius: 5px;
+    min-height: 60vh;
+    transition: .2s all;
+}
+body{
+    background: url("../img/bg.jpg");
+    background-size: cover;
+}
+
+table, td, tr, th {
+    border-bottom-width: 2px;
+    border-color: black !important;
+}
