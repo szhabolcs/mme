@@ -92,7 +92,7 @@ $(document).ready(function(){
     /**
      * Telepulesek kartya generalasa
      */
-    function makeCard(nev, megye){
+    function makeCard(nev, megye, telepulesID){
         var src = `https://www.google.com/maps/embed/v1/search?q=${nev}%2C%20Hungary&key=AIzaSyB6btLkafvHWbSOQwL8c-awc3ajYgkmzhE`;
         var card = $(CARDHTML);
         var teruletek = [];
@@ -101,7 +101,18 @@ $(document).ready(function(){
         card.find(".telepules-card-megye").text(megye);
         card.find("iframe").attr("src",src);
 
-        return card;
+        return new Promise(resolve => { 
+            getData(`/telepules/${telepulesID}/teruletek`).done((response)=>{
+                    
+                for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
+                    card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
+                }
+
+                if(response.length - 1 > 3)
+                    card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
+            });
+            resolve(card); 
+        });
     }
 
     /**
@@ -132,36 +143,18 @@ $(document).ready(function(){
 
         if(searchTerms.length == 0)
             for (i; i <= end; i++) {
-                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"]);
-
-                await getData(`/telepules/${response[i]["telepulesID"]}/teruletek`).done((response)=>{
-                    
-                    for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
-                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
+                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
+                        $("#card-box").append(card).fadeIn(500);
                     }
-
-                    if(response.length - 1 > 3)
-                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
-                });
-
-                $("#card-box").append(card).hide().fadeIn(500);
+                );
             }
         else
         for (i = 1; i <= pageMax; i++) {
             if(searchTerms.includes(response[i]["telepulesNev"])){
-                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"]);
-
-                await getData(`/telepules/${response[i]["telepulesID"]}/teruletek`).done((response)=>{
-                    
-                    for (let i = 1; (i <= response.length - 1) && (i <= 3); i++) {
-                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">${response[i]["teruletNeve"]}</span>`);
+                var card = makeCard(response[i]["telepulesNev"], response[i]["megyeNev"], response[i]["telepulesID"]).then((card)=>{
+                        $("#card-box").append(card).fadeIn(500);
                     }
-
-                    if(response.length - 1 > 3)
-                        card.find(".telepules-card-teruletek").append(`<span class="telepules-card-terulet">És még ${response.length-4} más.</span>`);
-                });
-
-                $("#card-box").append(card).hide().fadeIn(500);
+                );
             }
         }
     }
