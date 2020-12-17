@@ -92,6 +92,7 @@ h1, h2{
     background-color: #007769;
     font-family: var(--body);
     width: fit-content;
+    width: -moz-fit-content;
     padding: 10px 45px;
     color: white;
     font-size: 18px;
