@@ -117,10 +117,8 @@
 
         $query = 
         "SELECT DISTINCT $columns
-        FROM telepulesek, megyek, teruletek, tipusok
-        WHERE telepulesek.megyeID = megyek.megyeID
-        AND telepulesek.telepulesID = teruletek.telepulesID
-        AND teruletek.tipusID = tipusok.tipusID";
+        FROM telepulesek, megyek
+        WHERE telepulesek.megyeID = megyek.megyeID";
 
         if(isset($_GET["megyeNev"]))
             $query .= " AND megyek.megyeID = (SELECT megyeID FROM megyek WHERE megyeNev = '$_GET[megyeNev]')";
