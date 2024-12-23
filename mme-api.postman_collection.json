@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "92ef31a8-ee07-4aff-8763-e1595cc50d45",
+		"name": "mme tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13702727"
+	},
+	"item": [
+		{
+			"name": "INSERT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepules?telepulesID=332&telepulesNev=Teszt&megyeID=FE&MASTERPASS=none",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepules"
+					],
+					"query": [
+						{
+							"key": "telepulesID",
+							"value": "332"
+						},
+						{
+							"key": "telepulesNev",
+							"value": "Teszt"
+						},
+						{
+							"key": "megyeID",
+							"value": "FE"
+						},
+						{
+							"key": "MASTERPASS",
+							"value": "none"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepules/332?telepulesID=332&MASTERPASS=none",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepules",
+						"332"
+					],
+					"query": [
+						{
+							"key": "telepulesID",
+							"value": "332"
+						},
+						{
+							"key": "telepulesNev",
+							"value": "Valami teszt",
+							"disabled": true
+						},
+						{
+							"key": "megyeID",
+							"value": "ZA",
+							"disabled": true
+						},
+						{
+							"key": "MASTERPASS",
+							"value": "none"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepules/332?MASTERPASS=none",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepules",
+						"332"
+					],
+					"query": [
+						{
+							"key": "MASTERPASS",
+							"value": "none"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/telepulesek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepulesek",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepulesek"
+					],
+					"query": [
+						{
+							"key": "with-column",
+							"value": "megyeNev;megyek.megyeID",
+							"disabled": true
+						},
+						{
+							"key": "megyeNev",
+							"value": "Fejér",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "DESC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/telepules/:telepulesID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepules/:telepulesID/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepules",
+						":telepulesID",
+						""
+					],
+					"query": [
+						{
+							"key": "with-column",
+							"value": "megyeNev",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "telepulesID",
+							"value": "308",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "telepules/:telepulesID/teruletek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/telepules/:telepulesID/teruletek?with-column=tipusNev",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"telepules",
+						":telepulesID",
+						"teruletek"
+					],
+					"query": [
+						{
+							"key": "with-column",
+							"value": "tipusNev",
+							"description": "tipusNev;megyek.megyeNev;megyek.megyeID;telepulesek.telepulesID"
+						},
+						{
+							"key": "order",
+							"value": "DESC",
+							"disabled": true
+						},
+						{
+							"key": "tipusNev",
+							"value": "szikes puszta;rét, legelő",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "telepulesID",
+							"value": "308",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/statisztika/max-megye",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/statisztika/max-megye",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"statisztika",
+						"max-megye"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/statisztika/telepulesek-szama",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/statisztika/telepulesek-szama",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"statisztika",
+						"telepulesek-szama"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/statisztika/avg-terulet-nagysag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/statisztika/avg-terulet-nagysag",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"statisztika",
+						"avg-terulet-nagysag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/statisztika/teruletek-tipusonkent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/statisztika/teruletek-tipusonkent",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"statisztika",
+						"teruletek-tipusonkent"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "max",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "equal",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/megyek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/school/mme/api/megyek",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"school",
+						"mme",
+						"api",
+						"megyek"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
